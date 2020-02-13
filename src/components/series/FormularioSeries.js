@@ -35,25 +35,25 @@ class FormularioSeries extends Component {
                 </div>
                 <div className="card-body">
                     <form method="POST" onSubmit={this.enviaDados}>
-                        <div class="form-group">
+                        <div className="form-group">
                             <div className='form'>
                                 <label htmlFor="nome">Nome</label>
                                 <input type="text" id="nome" name="nome" 
-                                        onChange={this.inputHandler} value={this.state.nome} class="form-control"></input>
+                                        onChange={this.inputHandler} value={this.state.nome} className="form-control"></input>
 
                                 <label htmlFor="sinopse">Sinopse</label>
                                 <input type="text" id="sinopse" name="sinopse" 
-                                        onChange={this.inputHandler} value={this.state.sinopse} class="form-control"></input>
+                                        onChange={this.inputHandler} value={this.state.sinopse} className="form-control"></input>
 
                                 <label htmlFor="ano_lancamento">Ano de lançamento</label>
                                 <input type="text" id="ano_lancamento" name="ano_lancamento"
-                                        onChange={this.inputHandler} value={this.state.ano_lancamento} class="form-control"></input>
+                                        onChange={this.inputHandler} value={this.state.ano_lancamento} className="form-control"></input>
 
                                 <label htmlFor="temporadas">Temporadas</label>
                                 <textarea id="temporadas" name="temporadas"
-                                            onChange={this.inputHandler} value={this.state.temporadas} class="form-control"></textarea>
+                                            onChange={this.inputHandler} value={this.state.temporadas} className="form-control"></textarea>
 
-                                <button type="submit" class="btn btn-success form-control mt-2">Salvar</button>
+                                <button type="submit">Salvar</button>
                             </div>
                         </div>
                     </form>
