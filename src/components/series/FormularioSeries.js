@@ -4,21 +4,11 @@ class FormularioSeries extends Component {
 
     constructor() {
         super();
-  
-        this.stateInicial = {
-           nome: '',
-           sinopse: '',
-           ano_lancamento: '',
-           temporadas: ''
-        }
-
-        this.state = this.stateInicial;
      }
     
     inputHandler = e => {
         const { name, value } = e.target;
-
-        this.setState({[name] : value});
+        this.props.inputHandler(name, value)
     }
 
     enviaDados = e => {
@@ -28,6 +18,7 @@ class FormularioSeries extends Component {
     }
 
     render() {
+        const { serie } = this.props
         return (
             <div className="card">
                 <div className="card-header">
@@ -39,21 +30,21 @@ class FormularioSeries extends Component {
                             <div className='form'>
                                 <label htmlFor="nome">Nome</label>
                                 <input type="text" id="nome" name="nome" 
-                                        onChange={this.inputHandler} value={this.state.nome} className="form-control"></input>
+                                        onChange={this.inputHandler} value={serie.nome} className="form-control"></input>
 
                                 <label htmlFor="sinopse">Sinopse</label>
                                 <input type="text" id="sinopse" name="sinopse" 
-                                        onChange={this.inputHandler} value={this.state.sinopse} className="form-control"></input>
+                                        onChange={this.inputHandler} value={serie.sinopse} className="form-control"></input>
 
                                 <label htmlFor="ano_lancamento">Ano de lançamento</label>
                                 <input type="text" id="ano_lancamento" name="ano_lancamento"
-                                        onChange={this.inputHandler} value={this.state.ano_lancamento} className="form-control"></input>
+                                        onChange={this.inputHandler} value={serie.ano_lancamento} className="form-control"></input>
 
                                 <label htmlFor="temporadas">Temporadas</label>
                                 <textarea id="temporadas" name="temporadas"
-                                            onChange={this.inputHandler} value={this.state.temporadas} className="form-control"></textarea>
+                                            onChange={this.inputHandler} value={serie.temporadas} className="form-control"></textarea>
 
-                                <button type="submit">Salvar</button>
+                                <button type="submit" className="">Salvar</button>
                             </div>
                         </div>
                     </form>

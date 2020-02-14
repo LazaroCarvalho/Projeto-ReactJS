@@ -24,13 +24,16 @@ const ListaSeries = (props) => {
                                 <br/>
                                 <a href="#">Sinopse</a>
                                 <div className="text-center mt-1">
-                                    <button className="btn btn-outline-danger btn-sm md-2" onClick={() => {
+                                   <button className="btn btn-outline-danger btn-sm md-2" onClick={() => {
                                         if(window.confirm('Deseja realmente excluir?'))
                                             props.deleta(serie.id)
                                     }}>
                                         Delete
                                     </button>
-                                    <button className="btn btn-outline-warning btn-sm md-2">
+                                    <button className="btn btn-outline-warning btn-sm md-2"
+                                            onClick={() => {
+                                                props.consulta(serie)
+                                            }}>
                                         Editar
                                     </button>
                                 </div>
@@ -46,14 +49,16 @@ const ListaSeries = (props) => {
 class TabelaSeries extends Component {
 
     render() {
-        const { series, deleta } = this.props;
+        const { series, deleta, consulta } = this.props;
         return (
             <div className="card">
                 <div className="card-header ">
                     <h5 className="text-center">Lista de Séries</h5>
                 </div>
                 <div>
-                    <ListaSeries series={series} deleta={deleta}/>
+                    <ListaSeries series = {series}
+                                 consulta = {consulta}
+                                 deleta = {deleta}/>
                 </div>
             </div>
             
