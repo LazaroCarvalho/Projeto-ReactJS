@@ -16,8 +16,7 @@ class FormularioSeries extends Component {
         this.state = this.stateInicial;
 
         PubSub.subscribe('editing', (msg, serie) => {
-            console.log(msg)
-            console.log(serie)
+            this.setState(serie)
         })
      }
     
@@ -35,7 +34,7 @@ class FormularioSeries extends Component {
 
     render() {
         return (
-            <div className="card">
+            <div className="card bg-dark text-white">
                 <div className="card-header">
                     Cadastro de Series
                 </div>
@@ -59,7 +58,7 @@ class FormularioSeries extends Component {
                                 <textarea id="temporadas" name="temporadas"
                                             onChange={this.inputHandler} value={this.state.temporadas} className="form-control"></textarea>
 
-                                <button type="submit">Salvar</button>
+                                <button type="submit" className="btn btn-success form-control mt-2">Salvar</button>
                             </div>
                         </div>
                     </form>

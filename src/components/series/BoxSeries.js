@@ -19,9 +19,9 @@ class BoxSeries extends Component {
      }
 
      enviaDados = async (serie) => {
-
+        const method = serie.id ? 'PUT' : 'POST'
         const requisicao = {
-            method : "POST",
+            method : method,
             headers : {
                 Accept: 'application/json',
                 'Content-Type' : 'application/json'
@@ -29,9 +29,21 @@ class BoxSeries extends Component {
             body : JSON.stringify(serie)
         }
 
+        let urlParam = serie.id || ''
+
         try {
-            const retorno = await fetch('http://localhost:3000/series', requisicao);
-            this.setState({series: [...this.state.series, serie]});
+            const retorno = 
+                await fetch('http://localhost:3000/series/' + urlParam, requisicao);
+            
+            if(retorno.status == 201) {
+                return this.setState({series: [...this.state.series, serie],
+                    serie: this.novaSerie});
+            }
+            if(retorno.status == 200) {
+                return this.setState({series: this.state.series.map(s => s.id == serie.id ? serie : s),
+                    serie: this.novaSerie});
+            }
+
         } catch(erro) {
             console.log(erro)
         }

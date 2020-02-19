@@ -5,11 +5,11 @@ import './TabelaSeries.css'
 const ListaSeries = (props) => {
 
     return (
-        <div className="card-body card-body-flex">
+        <div className="card-body bg-dark card-body-flex">
             {
                 props.series.map(serie => {
                     return (
-                        <div className="card card-serie" key={serie.id}>
+                        <div className="card bg-dark card-serie" key={serie.id}>
                             <div className="card-header">
                                 <h5 className="card-title">{serie.nome}</h5>
                                 <h6 className="card-title text-muted">
@@ -25,16 +25,16 @@ const ListaSeries = (props) => {
                                 <br/>
                                 <a href="#">Sinopse</a>
                                 <div className="text-center mt-1">
-                                    <button className="btn btn-outline-danger btn-sm md-2" onClick={() => {
+                                   <button className="btn btn-outline-danger btn-sm md-2" onClick={() => {
                                         if(window.confirm('Deseja realmente excluir?'))
                                             props.deleta(serie.id)
                                     }}>
                                         Delete
                                     </button>
                                     <button className="btn btn-outline-warning btn-sm md-2"
-                                    onClick={() => {
-                                        PubSub.publish('editing', serie)
-                                    }}>
+                                            onClick={() => {
+                                                PubSub.publish('editing', serie)
+                                            }}>
                                         Editar
                                     </button>
                                 </div>
@@ -50,14 +50,16 @@ const ListaSeries = (props) => {
 class TabelaSeries extends Component {
 
     render() {
-        const { series, deleta } = this.props;
+        const { series, deleta, consulta } = this.props;
         return (
-            <div className="card">
+            <div className="card bg-dark text-white">
                 <div className="card-header ">
                     <h5 className="text-center">Lista de Séries</h5>
                 </div>
                 <div>
-                    <ListaSeries series={series} deleta={deleta}/>
+                    <ListaSeries series = {series}
+                                 consulta = {consulta}
+                                 deleta = {deleta}/>
                 </div>
             </div>
             
