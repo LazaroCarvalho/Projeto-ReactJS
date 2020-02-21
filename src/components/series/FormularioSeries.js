@@ -28,6 +28,7 @@ class FormularioSeries extends Component {
 		e.preventDefault()
 		this.props.enviaDados(this.state)
 		this.setState(this.stateInicial)
+		delete this.state.id
 	}
 
 	render() {

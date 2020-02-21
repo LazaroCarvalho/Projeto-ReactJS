@@ -1,7 +1,23 @@
+import { doRequest, doPublicRequest } from './baseapi-services'
+import { KEYS } from 'eslint-visitor-keys';
+
+const RESOURCE = 'auth/'
+
 const TOKEN_KEY = '@Series:token'
 
-export const signIn = (usuario) => {
-    localStorage.setItem(TOKEN_KEY,JSON.stringify(usuario))
+export const signIn = async (usuario) => {
+    try{
+        const retorno = await doPublicRequest(RESOURCE + 'autenticar/', 'POST', usuario)
+
+        if(retorno.ok) {
+            const usuario = retorno.json()
+            localStorage.setItem(TOKEN_KEY, JSON.stringify(usuario))
+        }
+        
+        return retorno
+    } catch(erro) {
+        return erro
+    }
 }
 
 export const signOut = () => {

@@ -27,22 +27,13 @@ export default class Login extends Component {
 	}
 
 	signIn = async (e) => {
-		e.preventDefault()
-		const { email, senha } = this.state
-		const params = {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: email,
-				senha: senha
-			})
-		}
+		
 		try {
-			const retorno
-				= await fetch('http://localhost:3000/auth/autenticar', params)
+			e.preventDefault()
+
+			const usuario = this.state
+			delete usuario.msgErro
+			const retorno = await signIn(usuario)
 
 			if(retorno.status === 400){
 				const erro = await retorno.json()
@@ -50,13 +41,10 @@ export default class Login extends Component {
 			}
 
 			if(retorno.ok){
-				const resposta = await retorno.json()
-				signIn(resposta)
 				this.props.history.push('/')
 			}
-
-		} catch (e) {
-			console.log(e)
+		} catch(erro) {
+			console.log(erro)
 		}
 	}
 
@@ -73,7 +61,7 @@ export default class Login extends Component {
 						name="email"
 						className="form-control"
 						placeholder="Endereço de e-mail"
-						required autofocus
+						required autoFocus
 						onChange={this.inputHandler} />
 					<label htmlFor="inputPassword" className="sr-only">Senha</label>
 					<input type="password"
