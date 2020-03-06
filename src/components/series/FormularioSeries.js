@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import PubSub from 'pubsub-js'
+import { listarGeneros } from '../../services/generos-service'
 
 class FormularioSeries extends Component {
 
 	constructor() {
 		super()
 		this.stateInicial = {
-			nome: '',
-			ano_lancamento: '',
-			temporadas: '',
-			sinopse: ''
+			serie: {
+				nome: '',
+				ano_lancamento: '',
+				temporadas: '',
+				sinopse: ''
+			},
+			generos: {
+
+			}
 		}
 
 		this.state = this.stateInicial
@@ -17,6 +23,11 @@ class FormularioSeries extends Component {
 		PubSub.subscribe('editing',(msg,serie) => {
 			this.setState(serie)
 		})
+
+		this.state.generos = {generos: this.buscaGeneros()}
+
+		console.log(this.state.generos)
+		
 	}
 
 	inputHandler = (e) => {
@@ -24,12 +35,17 @@ class FormularioSeries extends Component {
 		this.setState({ [name]: value })
 	}
 
-	enviaDados = (e) => {
+	enviaDados = async (e) => {
 		e.preventDefault()
-		this.props.enviaDados(this.state)
+		await this.props.enviaDados(this.state)
 		this.setState(this.stateInicial)
 		delete this.state.id
 	}
+
+	buscaGeneros = async () => {
+		return await listarGeneros()
+	}
+	
 
 	render() {
 		return (
@@ -45,6 +61,13 @@ class FormularioSeries extends Component {
 								className="form-control mb-2"
 								value={this.state.nome}
 								onChange={this.inputHandler} />
+							<label htmlFor='genero'>Gênero</label>
+							<select className="custom-select">
+								<option selected>
+									Selecione um Gênero
+								</option>
+								
+							</select>
 							<label htmlFor='ano_lancamento'>Ano de Lançamento</label>
 							<input type="number" id='ano_lancamento' name='ano_lancamento'
 								className="form-control"
@@ -68,7 +91,6 @@ class FormularioSeries extends Component {
 			</div>
 		)
 	}
-
 }
 
 

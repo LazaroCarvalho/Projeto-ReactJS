@@ -4,6 +4,10 @@ import './TabelaSeries.css'
 
 const ListaSeries = (props) => {
 
+	if(props.series.erro){
+		return <h1>{props.series.erro}</h1>
+	}
+
 	return (
 		<div className="card-body card-body-flex">
 			{props.series.map(serie => {
@@ -16,18 +20,17 @@ const ListaSeries = (props) => {
 							</h6>
 						</div>
 						<div className="card-body">
-							<img src="/logo192.png" alt="a" className="card-img" />
+							<img src="/logo192.png" className="card-img" />
 						</div>
 						<div className="card-footer">
 							{serie.temporadas}
 							{serie.temporadas > 1 ? ' temporadas' : ' temporada'}
 							<br />
-							<a href="#"
-								data-toggle="modal"
-								data-target="#exampleModalCenter"
+							<a href="#" data-toggle="modal" data-target="#exampleModalCenter" 
 								onClick={() => {
 									PubSub.publish('detail', serie)
-								}}>Sinopse</a> <br />
+								}}
+								>Ver Mais...</a> <br />
 							<div className="text-center mt-1">
 								<button
 									className="btn btn-outline-danger btn-sm mr-2 p-1"
@@ -56,8 +59,8 @@ const ListaSeries = (props) => {
 
 class TabelaSeries extends Component {
 
-	constructor() {
-		super()
+	constructor(){
+		super ()
 		this.state = {
 			serieDetalhe: ''
 		}
@@ -68,15 +71,12 @@ class TabelaSeries extends Component {
 
 	render() {
 
-		const { series, deleta } = this.props
-
 		const serieDetalhe = this.state.serieDetalhe
+
+		const { series, deleta } = this.props
 
 		return (
 			<div className='card'>
-				<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-					Botão!
-				</button>
 				<div className="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div className="modal-dialog modal-dialog-centered" role="document">
 					<div className="modal-content">
@@ -87,11 +87,13 @@ class TabelaSeries extends Component {
 						</button>
 					</div>
 					<div className="modal-body">
-						<img src='/logo192.png' className='card-img' />
+						<img src='/logo192.png'/>
+						<br/>
 						{serieDetalhe.temporadas}
 						{serieDetalhe.temporadas > 1 ? 'temporadas' : 'temporada'}
-						<br />
-						{serieDetalhe.ano_lancamento}
+						<br/>
+						<h6>{serieDetalhe.ano_lancamento}</h6>
+						{serieDetalhe.sinopse}
 					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,4 +1,4 @@
-import { doRequest } from './baseapi-services'
+import { doRequest } from './baseapi-service'
 
 const RESOURCE = 'series/'
 
@@ -9,9 +9,11 @@ export const listar = () => {
 export const inserir = (serie) => {
     return doRequest(RESOURCE, 'POST', serie)
 }
+
 export const remover = (id) => {
     return doRequest(RESOURCE, 'DELETE', '', id)
 }
+
 export const atualizar = (serie) => {
     return doRequest(RESOURCE, 'PUT', serie, serie.id)
 }

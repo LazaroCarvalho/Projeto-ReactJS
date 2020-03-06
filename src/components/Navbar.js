@@ -4,7 +4,7 @@ import { signOut } from '../services/auth-service'
 
 export default class Navbar extends Component {
 
-	constructor() {
+	constructor(){
 		super()
 		this.state = {
 			signOut: false
@@ -12,8 +12,8 @@ export default class Navbar extends Component {
 	}
 
 	render() {
-		if(this.state.signOut) {
-			return <Redirect to='/login' />
+		if(this.state.signOut){
+			return <Redirect to='/login'/>
 		}
 		return (
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
@@ -34,12 +34,15 @@ export default class Navbar extends Component {
 							<Link className="nav-link" to="/autores">Autores</Link>
 						</li>
 					</ul>
-					<button className="btn btn-outline-danger my-2 my-sm-0"
-							onClick={() => {
-								signOut()
-								this.setState({signOut: true})
-							}}
-							type="submit">Sair</button>
+					<button
+						className="btn btn-outline-danger my-2 my-sm-0"
+						onClick={() => {
+							signOut()
+							this.setState({signOut: true})
+						}}
+						type="submit">
+						Sair
+						</button>
 				</div>
 			</nav>
 		)

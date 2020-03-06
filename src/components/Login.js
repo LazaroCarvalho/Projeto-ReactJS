@@ -27,24 +27,19 @@ export default class Login extends Component {
 	}
 
 	signIn = async (e) => {
-		
 		try {
 			e.preventDefault()
-
 			const usuario = this.state
 			delete usuario.msgErro
 			const retorno = await signIn(usuario)
-
-			if(retorno.status === 400){
+			if (retorno.status === 400) {
 				const erro = await retorno.json()
-				return this.setState({msgErro: erro.erro})
+				return this.setState({ msgErro: erro.erro })
 			}
+			if (retorno.ok) this.props.history.push('/')
 
-			if(retorno.ok){
-				this.props.history.push('/')
-			}
-		} catch(erro) {
-			console.log(erro)
+		} catch (e) {
+			console.log(e)
 		}
 	}
 
@@ -52,18 +47,18 @@ export default class Login extends Component {
 		return (
 			<div className="body">
 				<form className="form-signin" onSubmit={this.signIn}>
-					<img className="mb-4" src="/logo192.png" alt="" width="72" height="72"></img>
+					<img class="mb-4" src="/logo192.png" alt="" width="72" height="72"></img>
 					<h1 className="h3 mb-3 font-weight-normal">Por favor, faça login</h1>
 					<MsgErro mensagem={this.state.msgErro} />
-					<label htmlFor="inputEmail" className="sr-only">E-mail</label>
+					<label for="inputEmail" className="sr-only">E-mail</label>
 					<input type="email"
 						id="email"
 						name="email"
 						className="form-control"
 						placeholder="Endereço de e-mail"
-						required autoFocus
+						required autofocus
 						onChange={this.inputHandler} />
-					<label htmlFor="inputPassword" className="sr-only">Senha</label>
+					<label for="inputPassword" className="sr-only">Senha</label>
 					<input type="password"
 						id="senha"
 						name="senha"
